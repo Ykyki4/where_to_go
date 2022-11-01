@@ -33,4 +33,4 @@ class Image(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="image")
 
     def __str__(self):
-        return self.place.title
+        return f"{self.order_numb} {self.place.title}"
