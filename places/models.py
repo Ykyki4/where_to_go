@@ -1,3 +1,27 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
+class Place(models.Model):
+    title = models.CharField("Заголовок", max_length=150)
+    description_short = models.CharField("Короткое описание", max_length=350)
+    description_long = models.TextField("Длинное описание")
+
+    lat = models.FloatField(
+        verbose_name='Широта',
+        validators=[
+            MinValueValidator(-90.0),
+            MaxValueValidator(90.0)
+        ]
+    )
+
+    lon = models.FloatField(
+        verbose_name='Долгота',
+        validators=[
+            MinValueValidator(-180.0),
+            MaxValueValidator(180.0)
+        ]
+    )
+
+    def __str__(self):
+        return self.title
