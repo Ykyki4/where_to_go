@@ -25,3 +25,12 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Image(models.Model):
+    order_numb = models.SmallIntegerField("Порядок")
+    image = models.ImageField()
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="image")
+
+    def __str__(self):
+        return self.place.title
