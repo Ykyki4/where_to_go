@@ -28,7 +28,7 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    order_numb = models.SmallIntegerField("Порядок")
+    order_numb = models.SmallIntegerField("Порядок", default=0)
     image = models.ImageField("Картинка")
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="images")
 
