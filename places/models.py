@@ -30,7 +30,7 @@ class Place(models.Model):
 class Image(models.Model):
     order_numb = models.SmallIntegerField("Порядок")
     image = models.ImageField()
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="image")
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="images")
 
     def __str__(self):
         return f"{self.order_numb} {self.place.title}"
