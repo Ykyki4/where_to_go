@@ -9,7 +9,7 @@ class Place(models.Model):
     description_long = HTMLField("Длинное описание", null=True, blank=True)
 
     lat = models.FloatField(
-        verbose_name='Широта',
+        verbose_name="Широта",
         validators=[
             MinValueValidator(-90.0),
             MaxValueValidator(90.0)
@@ -17,7 +17,7 @@ class Place(models.Model):
     )
 
     lon = models.FloatField(
-        verbose_name='Долгота',
+        verbose_name="Долгота",
         validators=[
             MinValueValidator(-180.0),
             MaxValueValidator(180.0)
@@ -37,6 +37,6 @@ class Image(models.Model):
         return f"{self.order_numb} {self.place.title}"
 
     class Meta(object):
-        ordering = ['order_numb']
+        ordering = ["order_numb"]
         verbose_name = "Картинка"
         verbose_name_plural = "Картинки"
