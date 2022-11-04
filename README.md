@@ -17,6 +17,10 @@
  * SECURE_SSL_REDIRECT
  * SESSION_COOKIE_SECURE
  * CSRF_COOKIE_SECURE
+ * SECRET_KEY
+ * STATIC_URL
+ * STATICFILES_DIRS
+ * MEDIA_URL
 
 Когда справились с предыдущем шагом, вам надо запустить ряд команд в терминал
 
