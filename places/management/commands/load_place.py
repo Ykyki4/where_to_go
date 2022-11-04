@@ -22,7 +22,7 @@ class Command(BaseCommand):
                 place = place_response.json()
                 image_urls = place.get('imgs')
                 try:
-                    place_created, is_created = Place.objects.get_or_create(
+                    place_created, created = Place.objects.get_or_create(
                         title=place['title'],
                         lon=place['coordinates']['lng'],
                         lat=place['coordinates']['lat'],
