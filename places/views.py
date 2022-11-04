@@ -22,21 +22,21 @@ def get_place(request, place_id):
 
 
 def index(request):
-    places_descriptions = []
-    for place in Place.objects.all():
-        place_description = {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [place.lon, place.lat]
-                    },
-                    "properties": {
-                        "title": place.title,
-                        "placeId": place.id,
-                        "detailsUrl": reverse(get_place, args=[place.id])
-                    }
-                }
-        places_descriptions.append(place_description)
+    places_descriptions = [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [place.lon, place.lat]
+            },
+            "properties": {
+                "title": place.title,
+                "placeId": place.id,
+                "detailsUrl": reverse(get_place, args=[place.id])
+            }
+        }
+        for place in Place.objects.all()
+    ]
 
     places_geojson = {
         "type": "FeatureCollection",
