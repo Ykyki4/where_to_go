@@ -38,8 +38,8 @@ def index(request):
         for place in Place.objects.all()
     ]
 
-    places_geojson = {
+    places = {
         "type": "FeatureCollection",
         "features": places_descriptions
         }
-    return render(request, 'index.html', {"places_geojson": places_geojson})
+    return render(request, 'index.html', {"places_geojson": places})
