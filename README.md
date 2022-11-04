@@ -19,7 +19,7 @@
  * CSRF_COOKIE_SECURE
  * SECRET_KEY
  * STATIC_URL
- * STATIC_ROOT
+ * STATICFILES_DIRS
  * MEDIA_URL
 
 Когда справились с предыдущем шагом, вам надо запустить ряд команд в терминал
