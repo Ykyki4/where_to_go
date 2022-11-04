@@ -22,9 +22,8 @@ def get_place(request, place_id):
 
 
 def index(request):
-    places = Place.objects.all()
     places_descriptions = []
-    for place in places.iterator():
+    for place in Place.objects.all():
         place_description = {
                     "type": "Feature",
                     "geometry": {
