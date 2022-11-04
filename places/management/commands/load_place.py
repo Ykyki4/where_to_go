@@ -8,8 +8,17 @@ from django.core.files.base import ContentFile
 from places.models import Place, Image
 
 
+def save_images(place_created, order, img_url):
+    filename = unquote(Path(urlparse(img_url).path).name)
+    image_response = requests.get(img_url)
+    image_response.raise_for_status()
+    image_content = ContentFile(image_response.content, name=filename)
+
+    Image(order_numb=order, place=place_created, image=image_content).save()
+
 class Command(BaseCommand):
     help = 'Команда чтобы добавить новое место. Просто укажите адрес нужного json'
+
 
     def add_arguments(self, parser):
         parser.add_argument('json_url', type=str, nargs='+', help='Адрес нужного вам json.')
@@ -38,12 +47,7 @@ class Command(BaseCommand):
                         continue
                 for order, img_url in enumerate(image_urls):
                     try:
-                        filename = unquote(Path(urlparse(img_url).path).name)
-                        image_response = requests.get(img_url)
-                        image_response.raise_for_status()
-                        image_content = ContentFile(image_response.content, name=filename)
-
-                        Image(order_numb=order, place=place_created, image=image_content).save()
+                        save_images(place_created, order, img_url)
                     except requests.exceptions.HTTPError:
                         self.stderr.write(self.style.ERROR(
                             f'Картинка по адресу {img_url} не найдена'))
