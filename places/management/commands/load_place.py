@@ -20,17 +20,22 @@ class Command(BaseCommand):
                 place_response = requests.get(place_url)
                 place_response.raise_for_status()
                 place = place_response.json()
-                image_urls = place['imgs']
-                place_created, is_created = Place.objects.get_or_create(
-                    title=place['title'],
-                    lon=place['coordinates']['lng'],
-                    lat=place['coordinates']['lat'],
-                    defaults={
-                        'description_short': place['description_short'],
-                        'description_long': place['description_long'],
-                    }
-                )
-
+                image_urls = place.get('imgs')
+                try:
+                    place_created, is_created = Place.objects.get_or_create(
+                        title=place['title'],
+                        lon=place['coordinates']['lng'],
+                        lat=place['coordinates']['lat'],
+                        defaults={
+                            'description_short': place.get('description_short'),
+                            'description_long': place.get('description_long'),
+                        }
+                    )
+                except KeyError as exc:
+                    if exc.args[0] in ['title', 'coordinates']:
+                        self.stderr.write(self.style.ERROR(
+                            f'Недоступно поле "{exc.args[0]}" '))
+                        continue
                 for order, img_url in enumerate(image_urls):
                     try:
                         filename = unquote(Path(urlparse(img_url).path).name)
