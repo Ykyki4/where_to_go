@@ -5,7 +5,7 @@ from adminsortable2.admin import SortableInlineAdminMixin
 from .models import Place, Image
 
 
-class ImageInlain(SortableInlineAdminMixin, admin.TabularInline):
+class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
     fields = ['place', 'image', 'get_image_preview']
     readonly_fields = ['get_image_preview']
@@ -19,7 +19,7 @@ class ImageInlain(SortableInlineAdminMixin, admin.TabularInline):
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [
-        ImageInlain,
+        ImageInline,
     ]
 
 
