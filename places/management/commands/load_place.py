@@ -40,10 +40,10 @@ class Command(BaseCommand):
                             'description_long': place.get('description_long'),
                         }
                     )
-                except KeyError as exc:
-                    if exc.args[0] in ['title', 'coordinates']:
+                except KeyError as exception:
+                    if exception.args[0] in ['title', 'coordinates']:
                         self.stderr.write(self.style.ERROR(
-                            f'Недоступно поле "{exc.args[0]}" '))
+                            f'Недоступно поле "{exception.args[0]}" '))
                         continue
                 if image_urls:
                     for order, img_url in enumerate(image_urls):
