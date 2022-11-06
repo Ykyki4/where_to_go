@@ -12,15 +12,15 @@
  
  Далее, создайте файл .env и установите следующие переменные окружения:
  
- * DEBUG
- * ALLOWED_HOSTS
- * SECURE_SSL_REDIRECT
- * SESSION_COOKIE_SECURE
- * CSRF_COOKIE_SECURE
- * SECRET_KEY
- * STATIC_URL
- * STATICFILES_DIRS
- * MEDIA_URL
+ * [DEBUG](https://docs.djangoproject.com/en/4.1/ref/settings/#debug)
+ * [ALLOWED_HOSTS](https://docs.djangoproject.com/en/4.1/ref/settings/#allowed-hosts)
+ * [SECURE_SSL_REDIRECT](https://docs.djangoproject.com/en/4.1/ref/settings/#secure-ssl-redirect)
+ * [SESSION_COOKIE_SECURE](https://docs.djangoproject.com/en/4.1/ref/settings/#session-cookie-secure)
+ * [CSRF_COOKIE_SECURE](https://docs.djangoproject.com/en/4.1/ref/settings/#csrf-cookie-secure)
+ * [SECRET_KEY](https://docs.djangoproject.com/en/4.1/ref/settings/#secret-key)
+ * [STATIC_URL](https://docs.djangoproject.com/en/4.1/ref/settings/#static-url)
+ * [STATICFILES_DIRS](https://docs.djangoproject.com/en/4.1/ref/settings/#staticfiles-dirs)
+ * [MEDIA_URL](https://docs.djangoproject.com/en/4.1/ref/settings/#media-url)
 
 Когда справились с предыдущем шагом, вам надо запустить ряд команд в терминал
 
