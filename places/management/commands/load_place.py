@@ -41,10 +41,9 @@ class Command(BaseCommand):
                         }
                     )
                 except KeyError as exception:
-                    if exception.args[0] in ['title', 'coordinates']:
-                        self.stderr.write(self.style.ERROR(
-                            f'Недоступно поле "{exception.args[0]}" '))
-                        continue
+                    self.stderr.write(self.style.ERROR(
+                        f'Недоступно поле "{exception.args[0]}" '))
+                    continue
                 if image_urls:
                     for order, img_url in enumerate(image_urls):
                         try:
