@@ -8,20 +8,23 @@ from django.core.files.base import ContentFile
 from places.models import Place, Image
 
 
-def save_images(place_created, order, img_url):
-    filename = unquote(Path(urlparse(img_url).path).name)
-    image_response = requests.get(img_url)
-    image_response.raise_for_status()
-    image_content = ContentFile(image_response.content, name=filename)
-
-    Image(order_numb=order, place=place_created, image=image_content).save()
-
-
 class Command(BaseCommand):
     help = 'Команда чтобы добавить новое место. Просто укажите адрес нужного json'
 
     def add_arguments(self, parser):
         parser.add_argument('json_url', type=str, nargs='+', help='Адрес нужного вам json.')
+
+    def save_images(self, place, img_urls):
+        for order, img_url in enumerate(img_urls):
+            try:
+                filename = unquote(Path(urlparse(img_url).path).name)
+                image_response = requests.get(img_url)
+                image_response.raise_for_status()
+                image_content = ContentFile(image_response.content, name=filename)
+                Image(order_numb=order, place=place, image=image_content).save()
+            except requests.exceptions.HTTPError:
+                self.stderr.write(self.style.ERROR(
+                    f'Картинка по адресу {img_url} не найдена'))
 
     def handle(self, *args, **options):
         try:
@@ -45,12 +48,8 @@ class Command(BaseCommand):
                         f'Недоступно поле "{exception.args[0]}" '))
                     continue
                 if image_urls:
-                    for order, img_url in enumerate(image_urls):
-                        try:
-                            save_images(place_created, order, img_url)
-                        except requests.exceptions.HTTPError:
-                            self.stderr.write(self.style.ERROR(
-                                f'Картинка по адресу {img_url} не найдена'))
+                    self.save_images(place_created, image_urls)
+
         except requests.exceptions.HTTPError:
             self.stderr.write(self.style.ERROR(
                 f'Описание локации по адресу {options["json_url"]} не найден'))
