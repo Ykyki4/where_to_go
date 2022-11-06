@@ -4,12 +4,12 @@ from tinymce.models import HTMLField
 
 
 class Place(models.Model):
-    title = models.CharField("Заголовок", max_length=150)
-    description_short = models.TextField("Короткое описание", blank=True)
-    description_long = HTMLField("Длинное описание", blank=True)
+    title = models.CharField('Заголовок', max_length=150)
+    description_short = models.TextField('Короткое описание', blank=True)
+    description_long = HTMLField('Длинное описание', blank=True)
 
     lat = models.FloatField(
-        verbose_name="Широта",
+        verbose_name='Широта',
         validators=[
             MinValueValidator(-90.0),
             MaxValueValidator(90.0)
@@ -17,7 +17,7 @@ class Place(models.Model):
     )
 
     lon = models.FloatField(
-        verbose_name="Долгота",
+        verbose_name='Долгота',
         validators=[
             MinValueValidator(-180.0),
             MaxValueValidator(180.0)
@@ -29,14 +29,14 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    order_numb = models.SmallIntegerField("Порядок", default=0)
-    image = models.ImageField("Картинка")
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="images")
+    order_numb = models.SmallIntegerField('Порядок', default=0)
+    image = models.ImageField('Картинка')
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
 
     class Meta(object):
-        ordering = ["order_numb"]
-        verbose_name = "Картинка"
-        verbose_name_plural = "Картинки"
+        ordering = ['order_numb']
+        verbose_name = 'Картинка'
+        verbose_name_plural = 'Картинки'
 
     def __str__(self):
-        return f"{self.order_numb} {self.place.title}"
+        return f'{self.order_numb} {self.place.title}'

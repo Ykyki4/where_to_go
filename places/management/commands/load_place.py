@@ -43,7 +43,7 @@ class Command(BaseCommand):
                 except KeyError as exc:
                     if exc.args[0] in ['title', 'coordinates']:
                         self.stderr.write(self.style.ERROR(
-                            f'Недоступно поле "{exc.args[0]}" '))
+                            f'Недоступно поле '{exc.args[0]}' '))
                         continue
                 for order, img_url in enumerate(image_urls):
                     try:
@@ -53,4 +53,4 @@ class Command(BaseCommand):
                             f'Картинка по адресу {img_url} не найдена'))
         except requests.exceptions.HTTPError:
             self.stderr.write(self.style.ERROR(
-                f'Описание локации по адресу {options["json_url"]} не найден'))
+                f'Описание локации по адресу {options['json_url']} не найден'))
