@@ -52,4 +52,4 @@ class Command(BaseCommand):
 
         except requests.exceptions.HTTPError:
             self.stderr.write(self.style.ERROR(
-                f'Описание локации по адресу {options["json_url"]} не найден'))
+                f"Описание локации по адресу {options['json_url']} не найден"))
