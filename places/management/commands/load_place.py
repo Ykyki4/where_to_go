@@ -41,8 +41,8 @@ class Command(BaseCommand):
                     lon=place['coordinates']['lng'],
                     lat=place['coordinates']['lat'],
                     defaults={
-                        'description_short': place.get('description_short'),
-                        'description_long': place.get('description_long'),
+                        'description_short': place.get('description_short', ''),
+                        'description_long': place.get('description_long', ''),
                     }
                 )
             except KeyError as exception:
