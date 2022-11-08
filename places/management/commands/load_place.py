@@ -35,7 +35,6 @@ class Command(BaseCommand):
             except requests.exceptions.HTTPError:
                 self.stderr.write(self.style.ERROR(
                 f"Описание локации по адресу {options['json_url']} не найдено"))
-            image_urls = place.get('imgs')
             try:
                 place_created, created = Place.objects.get_or_create(
                     title=place['title'],
@@ -50,5 +49,5 @@ class Command(BaseCommand):
                 self.stderr.write(self.style.ERROR(
                     f'Недоступно поле "{exception.args[0]}" '))
                 continue
-            if image_urls:
-                self.save_images(place_created, image_urls)
+            image_urls = place.get('imgs', [])
+            self.save_images(place_created, image_urls)
