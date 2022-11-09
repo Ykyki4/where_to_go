@@ -34,7 +34,7 @@ class Command(BaseCommand):
                 place = place_response.json()
             except requests.exceptions.HTTPError:
                 self.stderr.write(self.style.ERROR(
-                f"Описание локации по адресу {options['json_url']} не найдено"))
+                    f"Описание локации по адресу {options['json_url']} не найдено"))
             try:
                 place_created, created = Place.objects.get_or_create(
                     title=place['title'],
